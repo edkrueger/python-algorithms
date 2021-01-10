@@ -32,7 +32,7 @@ def _prep_integer_lists(x, y):
     return x_padded, y_padded
 
 
-def _recursive_integer_multiplication(x, y):
+def _recursive_integer_multiplication_prepadded(x, y):
     """Takes two lists of the same size of one-digit integers.
     Where the lists' length is a factor of 2.
     Where each list represents positive multidigit numbers.
@@ -48,14 +48,14 @@ def _recursive_integer_multiplication(x, y):
     c = y[0 : n // 2]
     d = y[n // 2 :]
 
-    ac = _recursive_integer_multiplication(a, c)
-    ad = _recursive_integer_multiplication(a, d)
-    bc = _recursive_integer_multiplication(b, c)
-    bd = _recursive_integer_multiplication(b, d)
+    ac = _recursive_integer_multiplication_prepadded(a, c)
+    ad = _recursive_integer_multiplication_prepadded(a, d)
+    bc = _recursive_integer_multiplication_prepadded(b, c)
+    bd = _recursive_integer_multiplication_prepadded(b, d)
 
     return (10 ** n) * ac + (10 ** (n // 2)) * (ad + bc) + bd
 
 
-def recursive_integer_multiplication(x, y):
+def recursive_integer_multiplication_prepadded(x, y):
     """Takes two positive integers and returns their product."""
-    return _recursive_integer_multiplication(*_prep_integer_lists(x, y))
+    return _recursive_integer_multiplication_prepadded(*_prep_integer_lists(x, y))
