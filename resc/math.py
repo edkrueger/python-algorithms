@@ -57,8 +57,3 @@ def recursive_integer_multiplication(n, m):
     print(n_padded, m_padded)
 
     return _recursive_integer_multiplication(n_padded, m_padded)
-
-
-if __name__ == "__main__":
-    print(recursive_integer_multiplication(1, 2))
-    print(recursive_integer_multiplication(123, 456))
