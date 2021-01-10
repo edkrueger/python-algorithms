@@ -35,6 +35,36 @@ def recursive_integer_multiplication(x, y):
     return (10 ** n) * ac + (10 ** (n // 2)) * (ad + bc) + bd
 
 
+def karatsuba_multiplication(x, y):
+    """Takes two positive integers and finds their product."""
+
+    if not isinstance(x, list):
+        x = [int(e) for e in list(str(x))]
+    if not isinstance(y, list):
+        y = [int(e) for e in list(str(y))]
+
+    if len(x) == 1:
+        return x[0] * y[0]
+
+    if len(x) % 2 != 0:
+        x = [0] + x
+    if len(y) % 2 != 0:
+        y = [0] + y
+
+    n = len(x)
+
+    a = int("".join([str(e) for e in x[0 : n // 2]]))
+    b = int("".join([str(e) for e in x[n // 2 :]]))
+    c = int("".join([str(e) for e in y[0 : n // 2]]))
+    d = int("".join([str(e) for e in y[n // 2 :]]))
+
+    pq = recursive_integer_multiplication(a + b, c + d)
+    ac = recursive_integer_multiplication(a, c)
+    bd = recursive_integer_multiplication(b, d)
+
+    return (10 ** n) * ac + (10 ** (n // 2)) * (pq - ac - bd) + bd
+
+
 def _log_ceil_rec(n, base):
     """Returns the number of times base divides n."""
     return 0 if n < base else 1 + _log_ceil_rec(n // base, base)
