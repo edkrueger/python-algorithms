@@ -15,6 +15,23 @@ def log_ceil_rec(n, base):
     return log if base ** (log := _log_ceil_rec(n, base)) == n else log + 1
 
 
+def _prep_integer_lists(x, y):
+    x = [int(e) for e in list(str(x))]
+    y = [int(e) for e in list(str(y))]
+
+    len_x = len(x)
+    len_y = len(y)
+    max_len = max(len_x, len_y)
+
+    log_ceil = log_ceil_rec(max_len, 2)
+    len_padded = 2 ** log_ceil
+
+    x_padded = (len_padded - len_x) * [0] + x
+    y_padded = (len_padded - len_y) * [0] + y
+
+    return x_padded, y_padded
+
+
 def _recursive_integer_multiplication(x, y):
     """Takes two lists of the same size of one-digit integers.
     Where the lists' length is a factor of 2.
@@ -39,21 +56,6 @@ def _recursive_integer_multiplication(x, y):
     return (10 ** n) * ac + (10 ** (n // 2)) * (ad + bc) + bd
 
 
-def recursive_integer_multiplication(n, m):
+def recursive_integer_multiplication(x, y):
     """Takes two positive integers and returns their product."""
-    n = [int(e) for e in list(str(n))]
-    m = [int(e) for e in list(str(m))]
-
-    len_n = len(n)
-    len_m = len(m)
-    max_len = max(len_n, len_m)
-
-    log_ceil = log_ceil_rec(max_len, 2)
-    len_padded = 2 ** log_ceil
-
-    n_padded = (len_padded - len_n) * [0] + n
-    m_padded = (len_padded - len_m) * [0] + m
-
-    print(n_padded, m_padded)
-
-    return _recursive_integer_multiplication(n_padded, m_padded)
+    return _recursive_integer_multiplication(*_prep_integer_lists(x, y))
