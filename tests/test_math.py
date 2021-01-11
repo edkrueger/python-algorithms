@@ -28,8 +28,11 @@ def test_recursive_integer_multiplication():
 
 def test_karatsuba_multiplication():
     """Tests karatsuba_multiplication."""
+    assert karatsuba_multiplication(0, 0) == 0 * 0
     assert karatsuba_multiplication(3, 9) == 3 * 9
     assert karatsuba_multiplication(123, 456) == 123 * 456
+    assert karatsuba_multiplication(12, 3456) == 12 * 3456
+    assert karatsuba_multiplication(3456, 0) == 0
 
 
 def test_recursive_integer_multiplication_prepadded():
